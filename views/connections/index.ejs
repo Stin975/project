@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs')%>
+    
+    <main>
+        <Div id="bodyBorder">
+            <% if(connections.length) {%>
+                <% var topics = []; %>
+                <% for ( var i = 0; i < connections.length; i++) {%>
+                    <% if (topics.length == 0) {
+                        topics.push(connections[i].topic);
+                    } %>
+                    <% if (!(topics.includes(connections[i].topic))){
+                        topics.push(connections[i].topic);
+                    } %>
+                
+                <%}%>
+                
+
+                <% for ( var i = 0; i < topics.length; i++) {%>
+                
+                <h2><%= topics[i] %></h2>
+                <%connections.forEach(connections=>{%>
+                    <% if (connections.topic == topics[i]){ %>
+                    <a href="/connections/<%= connections.id%>"><P><%= connections.title%></P></a>
+                   <%}%>
+                <% });
+                
+                }
+
+                
+            } else {%>
+                <p>there are no stories to display.</p>
+            <%}%>
+        </Div>
+        
+
+		
+    </main>
+
+    <%- include('../partials/footer.ejs')%>

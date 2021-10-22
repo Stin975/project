@@ -1,0 +1,53 @@
+<%- include('../partials/header.ejs')%>
+    
+    <main>
+        <div class="content">
+            <Form id="NCForm" method="POST" action="/connections/<%= connections.id%>?_method=PUT">
+                <ul>
+                    <li> 
+                        <label for="topic" class="NCLable">Topic:</label> 
+                        <input type="text" id="topic" name="topic" value="<%= connections.topic %>">
+                    </li>
+                    <li> 
+                        <label for="title" class="NCLable">Title:</label> 
+                        <input type="text" id="title" name="title" value="<%= connections.title %>">
+                    </li>
+                    <li> 
+                        <label for="host" class="NCLable">Host:</label> 
+                        <input type="text" id="host" name="host" value="<%= connections.host %>">
+                    </li>
+                    <li> 
+                        <label for="content" class="NCLable">Details:</label> 
+                        <input type="text" id="content" name="content" value="<%= connections.content %>">
+                    </li>
+                    <li> 
+                        <label for="address" class="NCLable">Location:</label> 
+                        <input type="text" id="address" name="address" value="<%= connections.address %>">
+                    </li>
+                    <li> 
+                        <label for="date" class="NCLable">Date:</label> 
+                        <input type="date" id="date" name="date" value="<%= connections.date%>">
+                    </li>
+                    <li> 
+                        <label for="startTimeM" class="NCLable">Start:</label> 
+                        <input type="time" id="startTimeM" name="startTimeM" value="<%= connections.startTimeM %>">
+                    </li>
+                    <li> 
+                        <label for="endTimeM" class="NCLable">End:</label> 
+                        <input type="time" id="endTimeM" name="endTimeM" value="<%= connections.endTimeM %>">
+                    </li>
+                    <li> 
+                        <label for="image" class="NCLable">Image URL:</label> 
+                        <input type="text" id="image" name="image" value="<%= connections.image %>">
+                    </li>
+                    <li >  
+                        <button type="submit"  id="formButton" >Update</button></li>
+                    
+                </ul>
+            </Form>
+        </div>
+
+		
+    </main>
+
+    <%- include('../partials/footer.ejs')%>

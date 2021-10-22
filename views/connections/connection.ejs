@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs')%>
+    
+    <main>
+        <Div id="connectionBody">
+            <h2><%= connection.title%></h2>
+            <form>
+            <button type="submit" formmethod="GET" formaction="/connections/<%= connection.id%>/edit">Edit</button>
+            <button type="submit" formmethod="POST" formaction="/connections/<%= connection.id%>?_method=DELETE">Delete</button>
+            </form>
+            <img class="conImg" src="<%= connection.image %>" alt="Broken Link">
+            <ul class="connectionInfo">
+                <li><p><%= connection.host%></p></li>
+                <li><p><%= connection.date%></p></li>
+                <li><p><%= connection.startTime%> - <%= connection.endTime%></p></li>
+                <li><p><%= connection.address%> </p></li>
+            </ul>
+            <h2 id="detailsPo">Details</h2>
+            <p><%= connection.content%></p>
+
+
+
+        </Div>
+        
+
+		
+    </main>
+
+    <%- include('../partials/footer.ejs')%>
