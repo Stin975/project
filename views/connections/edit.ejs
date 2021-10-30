@@ -2,43 +2,43 @@
     
     <main>
         <div class="content">
-            <Form id="NCForm" method="POST" action="/connections/<%= connections.id%>?_method=PUT">
+            <Form id="NCForm" method="POST" action="/connections/<%= games.id%>?_method=PUT">
                 <ul>
                     <li> 
                         <label for="topic" class="NCLable">Topic:</label> 
-                        <input type="text" id="topic" name="topic" value="<%= connections.topic %>">
+                        <input type="text" id="topic" name="topic" value="<%= games.topic %>">
                     </li>
                     <li> 
                         <label for="title" class="NCLable">Title:</label> 
-                        <input type="text" id="title" name="title" value="<%= connections.title %>">
+                        <input type="text" id="title" name="title" value="<%= games.title %>">
                     </li>
                     <li> 
                         <label for="host" class="NCLable">Host:</label> 
-                        <input type="text" id="host" name="host" value="<%= connections.host %>">
+                        <input type="text" id="host" name="host" value="<%= games.host %>">
                     </li>
                     <li> 
                         <label for="content" class="NCLable">Details:</label> 
-                        <input type="text" id="content" name="content" value="<%= connections.content %>">
+                        <input type="text" id="content" name="content" value="<%= games.content %>">
                     </li>
                     <li> 
                         <label for="address" class="NCLable">Location:</label> 
-                        <input type="text" id="address" name="address" value="<%= connections.address %>">
+                        <input type="text" id="address" name="address" value="<%= games.address %>">
                     </li>
                     <li> 
                         <label for="date" class="NCLable">Date:</label> 
-                        <input type="date" id="date" name="date" value="<%= connections.date%>">
+                        <input type="date" id="date" name="date" value="<%= games.date%>">
                     </li>
                     <li> 
                         <label for="startTimeM" class="NCLable">Start:</label> 
-                        <input type="time" id="startTimeM" name="startTimeM" value="<%= connections.startTimeM %>">
+                        <input type="time" id="startTimeM" name="startTimeM" value="<%= games.startTimeM %>">
                     </li>
                     <li> 
                         <label for="endTimeM" class="NCLable">End:</label> 
-                        <input type="time" id="endTimeM" name="endTimeM" value="<%= connections.endTimeM %>">
+                        <input type="time" id="endTimeM" name="endTimeM" value="<%= games.endTimeM %>">
                     </li>
                     <li> 
                         <label for="image" class="NCLable">Image URL:</label> 
-                        <input type="text" id="image" name="image" value="<%= connections.image %>">
+                        <input type="text" id="image" name="image" value="<%= games.image %>">
                     </li>
                     <li >  
                         <button type="submit"  id="formButton" >Update</button></li>

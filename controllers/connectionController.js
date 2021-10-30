@@ -1,36 +1,56 @@
 const model = require('../models/connections');
 
 
-exports.index = (req, res)=>{
+exports.index = (req, res, next)=>{
     //res.send('send all stories');
-    let connections = model.find();
-    res.render('./connections/index', {connections});
+    model.find()
+    .then(games=>res.render('./connections/index', {games}))
+    .catch(err=>next(err));
+    
 };
 
 exports.show = (req, res, next)=>{
     // res.send('send story with id ' + req.params.id);
     let id = req.params.id;
-    let connection = model.findById(id);
-    if(connection){
-     res.render('./connections/connection', {connection});
-    } else {
-     let err = new Error('Cannot find story with id ' + id);
-     err.status = '404';
-     next(err);
+    if(!id.match(/^[0-9a-fA-F]{24}$/)){
+        let err = new Error('Invalid story id ');
+        err.status = 400;
+        return next(err);
     }
+    model.findById(id)
+    .then((games)=>{
+        if (games){
+            res.render('./connections/connection', {games})
+        } else {
+            let err = new Error('Cannot find a story with id ' + id);
+            err.status = 404;
+            next(err);
+        }
+    })
+    .catch(err=>next(err));
  };
 
  exports.delete = (req, res, next)=>{
     let id = req.params.id;
-    
-    if( model.deleteById(id)) {
-     res.redirect('/connections');
-     }  else {
-         let err = new Error('Cannot find story with id ' + id);
-         err.status = '404';
-         next(err);
- }
- };
+
+    if(!id.match(/^[0-9a-fA-F]{24}$/)){
+        let err = new Error('Invalid story id ');
+        err.status = 400;
+        return next(err);
+    }
+
+    model.findByIdAndDelete(id, {useFindAndModify: false})
+    .then(game => {
+        if (game) {
+            res.redirect('/connections/');
+        } else {
+            let err = new Error('Cannot find a story with id ' + id);
+             err.status = 404;
+             next(err);
+        }
+    })
+    .catch(err=>next(err))
+};
 
  exports.new = (req, res)=>{
     res.render('./connections/newConnection')
@@ -38,36 +58,75 @@ exports.show = (req, res, next)=>{
 
 exports.create = (req, res)=>{
     //res.send('Created a new story')
-    let connection = req.body;
-    model.save(connection);
-    res.redirect('/connections');
-    console.log(req.body);
+    let game = req.body;
+
+    let time = game.startTimeM.split(':');
+    game.startTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
+    time = game.endTimeM.split(':');
+    game.endTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
+    
+    let Game = new model(game);// create a new story document
+    Game.save()// insert the new document
+    .then(Game=> res.redirect('/connections'))
+    .catch(err=>{
+        if(err.name === 'ValidationError'){
+            err.status = 400;
+        }
+        next(err);
+    });
 };
 
 exports.edit = (req, res, next)=>{
     let id = req.params.id;
-    
-    let connections = model.findById(id);
-    if(connections){
-        res.render('./connections/edit', {connections});
-       } else {
-        let err = new Error('Cannot find story with id ' + id);
-    err.status = '404';
-    next(err);
-       }
+    if(!id.match(/^[0-9a-fA-F]{24}$/)){
+        let err = new Error('Invalid story id ');
+        err.status = 400;
+        return next(err);
+    }
+    model.findById(id)
+    .then((games)=>{
+        if (games){
+            res.render('./connections/edit', {games})
+        } else {
+            let err = new Error('Cannot find a story with id ' + id);
+            err.status = 404;
+            next(err);
+        }
+    })
+    .catch(err=>next(err));
        
 };
 
 
 exports.update = (req, res, next)=>{
-    let connection = req.body;
-    console.log(req.body);
+    let game = req.body;
+
+    let time = game.startTimeM.split(':');
+    game.startTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
+    time = game.endTimeM.split(':');
+    game.endTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
+
     let id = req.params.id;
-   if( model.updateById(id, connection)) {
-       res.redirect('/connections/'+id);
-   }  else {
-    let err = new Error('Cannot find story with id ' + id);
-    err.status = '404';
-    next(err);
-   }
+    if(!id.match(/^[0-9a-fA-F]{24}$/)){
+        let err = new Error('Invalid story id ');
+        err.status = 400;
+        return next(err);
+    }
+
+    model.findByIdAndUpdate(id, game, {useFindAndModify: false, runValidators: true})
+    .then((game)=>{
+        if (game) {
+            res.redirect('/connections/'+id);
+        } else {
+            let err = new Error('Cannot find a story with id ' + id);
+             err.status = 404;
+             next(err);
+        }
+    })
+    .catch(err=> {
+        if(err.name === 'ValidationError'){
+            err.status = 400;
+        }
+        next(err)
+    });
 };

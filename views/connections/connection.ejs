@@ -2,20 +2,20 @@
     
     <main>
         <Div id="connectionBody">
-            <h2><%= connection.title%></h2>
+            <h2><%= games.title%></h2>
             <form>
-            <button type="submit" formmethod="GET" formaction="/connections/<%= connection.id%>/edit">Edit</button>
-            <button type="submit" formmethod="POST" formaction="/connections/<%= connection.id%>?_method=DELETE">Delete</button>
+            <button type="submit" formmethod="GET" formaction="/connections/<%= games.id%>/edit">Edit</button>
+            <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>?_method=DELETE">Delete</button>
             </form>
-            <img class="conImg" src="<%= connection.image %>" alt="Broken Link">
+            <img class="conImg" src="<%= games.image %>" alt="Broken Link">
             <ul class="connectionInfo">
-                <li><p><%= connection.host%></p></li>
-                <li><p><%= connection.date%></p></li>
-                <li><p><%= connection.startTime%> - <%= connection.endTime%></p></li>
-                <li><p><%= connection.address%> </p></li>
+                <li><p><%= games.host%></p></li>
+                <li><p><%= games.date%></p></li>
+                <li><p><%= games.startTime%> - <%= games.endTime%></p></li>
+                <li><p><%= games.address%> </p></li>
             </ul>
             <h2 id="detailsPo">Details</h2>
-            <p><%= connection.content%></p>
+            <p><%= games.content%></p>
 
 
 
