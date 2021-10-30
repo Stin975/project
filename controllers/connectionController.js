@@ -13,7 +13,7 @@ exports.show = (req, res, next)=>{
     // res.send('send story with id ' + req.params.id);
     let id = req.params.id;
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
-        let err = new Error('Invalid story id ');
+        let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
     }
@@ -22,7 +22,7 @@ exports.show = (req, res, next)=>{
         if (games){
             res.render('./connections/connection', {games})
         } else {
-            let err = new Error('Cannot find a story with id ' + id);
+            let err = new Error('Cannot find a connection with id ' + id);
             err.status = 404;
             next(err);
         }
@@ -34,7 +34,7 @@ exports.show = (req, res, next)=>{
     let id = req.params.id;
 
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
-        let err = new Error('Invalid story id ');
+        let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
     }
@@ -44,7 +44,7 @@ exports.show = (req, res, next)=>{
         if (game) {
             res.redirect('/connections/');
         } else {
-            let err = new Error('Cannot find a story with id ' + id);
+            let err = new Error('Cannot find a connection with id ' + id);
              err.status = 404;
              next(err);
         }
@@ -79,7 +79,7 @@ exports.create = (req, res, next)=>{
 exports.edit = (req, res, next)=>{
     let id = req.params.id;
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
-        let err = new Error('Invalid story id ');
+        let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
     }
@@ -88,7 +88,7 @@ exports.edit = (req, res, next)=>{
         if (games){
             res.render('./connections/edit', {games})
         } else {
-            let err = new Error('Cannot find a story with id ' + id);
+            let err = new Error('Cannot find a connection with id ' + id);
             err.status = 404;
             next(err);
         }
@@ -108,7 +108,7 @@ exports.update = (req, res, next)=>{
 
     let id = req.params.id;
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
-        let err = new Error('Invalid story id ');
+        let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
     }
@@ -118,7 +118,7 @@ exports.update = (req, res, next)=>{
         if (game) {
             res.redirect('/connections/'+id);
         } else {
-            let err = new Error('Cannot find a story with id ' + id);
+            let err = new Error('Cannot find a connection with id ' + id);
              err.status = 404;
              next(err);
         }
