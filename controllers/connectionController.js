@@ -1,5 +1,5 @@
 const model = require('../models/connections');
-
+const { DateTime } = require("luxon");
 
 exports.index = (req, res, next)=>{
     //res.send('send all stories');
@@ -56,7 +56,7 @@ exports.show = (req, res, next)=>{
     res.render('./connections/newConnection')
 };
 
-exports.create = (req, res)=>{
+exports.create = (req, res, next)=>{
     //res.send('Created a new story')
     let game = req.body;
 

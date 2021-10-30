@@ -6,39 +6,39 @@
                 <ul>
                     <li> 
                         <label for="topic" class="NCLable">Topic:</label> 
-                        <input type="text" id="topic" name="topic" value="<%= games.topic %>">
+                        <input type="text" id="topic" name="topic" value="<%= games.topic %>" required>
                     </li>
                     <li> 
                         <label for="title" class="NCLable">Title:</label> 
-                        <input type="text" id="title" name="title" value="<%= games.title %>">
+                        <input type="text" id="title" name="title" value="<%= games.title %>"required>
                     </li>
                     <li> 
                         <label for="host" class="NCLable">Host:</label> 
-                        <input type="text" id="host" name="host" value="<%= games.host %>">
+                        <input type="text" id="host" name="host" value="<%= games.host %>" required>
                     </li>
                     <li> 
                         <label for="content" class="NCLable">Details:</label> 
-                        <input type="text" id="content" name="content" value="<%= games.content %>">
+                        <input type="text" id="content" name="content" value="<%= games.content %>" required minlength="10">
                     </li>
                     <li> 
                         <label for="address" class="NCLable">Location:</label> 
-                        <input type="text" id="address" name="address" value="<%= games.address %>">
+                        <input type="text" id="address" name="address" value="<%= games.address %>" required>
                     </li>
                     <li> 
                         <label for="date" class="NCLable">Date:</label> 
-                        <input type="date" id="date" name="date" value="<%= games.date%>">
+                        <input type="date" id="date" name="date" value="<%= games.date%>" required>
                     </li>
                     <li> 
                         <label for="startTimeM" class="NCLable">Start:</label> 
-                        <input type="time" id="startTimeM" name="startTimeM" value="<%= games.startTimeM %>">
+                        <input type="time" id="startTimeM" name="startTimeM" value="<%= games.startTimeM %>" required>
                     </li>
                     <li> 
                         <label for="endTimeM" class="NCLable">End:</label> 
-                        <input type="time" id="endTimeM" name="endTimeM" value="<%= games.endTimeM %>">
+                        <input type="time" id="endTimeM" name="endTimeM" value="<%= games.endTimeM %>"required>
                     </li>
                     <li> 
                         <label for="image" class="NCLable">Image URL:</label> 
-                        <input type="text" id="image" name="image" value="<%= games.image %>">
+                        <input type="text" id="image" name="image" value="<%= games.image %>"required>
                     </li>
                     <li >  
                         <button type="submit"  id="formButton" >Update</button></li>

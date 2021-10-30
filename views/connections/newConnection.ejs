@@ -4,15 +4,15 @@
         <div class="content">
             <Form id="NCForm" action = '/connections' method = 'POST'>
                 <ul>
-                    <li> <label for="topic" class="NCLable">Topic:</label> <input type="text" id="topic" name="topic" placeholder="Topic"></li>
-                    <li> <label for="title" class="NCLable">Title:</label> <input type="text" id="title" name="title" placeholder="Title"></li>
-                    <li> <label for="host" class="NCLable">Host:</label> <input type="text" id="host" name="host" placeholder="Host"></li>
-                    <li> <label for="content" class="NCLable">Details:</label> <input type="text" id="content" name="content" placeholder="Description"></li>
-                    <li> <label for="address" class="NCLable">Location:</label> <input type="text" id="address" name="address" placeholder="Location"></li>
-                    <li> <label for="date" class="NCLable">Date:</label> <input type="date" id="date" name="date" ></li>
-                    <li> <label for="startTimeM" class="NCLable">Start:</label> <input type="time" id="startTimeM" name="startTimeM" ></li>
-                    <li> <label for="endTimeM" class="NCLable">End:</label> <input type="time" id="endTimeM" name="endTimeM" ></li>
-                    <li> <label for="image" class="NCLable">Image URL:</label> <input type="text" id="image" name="image" placeholder="https://www.pexels.com/"></li>
+                    <li> <label for="topic" class="NCLable">Topic:</label> <input type="text" id="topic" name="topic" placeholder="Topic" required></li>
+                    <li> <label for="title" class="NCLable">Title:</label> <input type="text" id="title" name="title" placeholder="Title" required></li>
+                    <li> <label for="host" class="NCLable">Host:</label> <input type="text" id="host" name="host" placeholder="Host" required></li>
+                    <li> <label for="content" class="NCLable">Details:</label> <input type="text" id="content" name="content" placeholder="Description" required minlength="10"></li>
+                    <li> <label for="address" class="NCLable">Location:</label> <input type="text" id="address" name="address" placeholder="Location" required></li>
+                    <li> <label for="date" class="NCLable">Date:</label> <input type="date" id="date" name="date" required></li>
+                    <li> <label for="startTimeM" class="NCLable">Start:</label> <input type="time" id="startTimeM" name="startTimeM" required></li>
+                    <li> <label for="endTimeM" class="NCLable">End:</label> <input type="time" id="endTimeM" name="endTimeM" required></li>
+                    <li> <label for="image" class="NCLable">Image URL:</label> <input type="text" id="image" name="image" placeholder="https://www.pexels.com/" required></li>
                     <li >  <button type="submit"  id="formButton" >Create Connection</button></li>
                     
                 </ul>
