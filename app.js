@@ -43,6 +43,8 @@ app.use(flash());
 app.use((req, res, next) => {
     //console.log(req.session);
     res.locals.user = req.session.user||null;
+    res.locals.firstName = req.session.firstName;
+    res.locals.lastName = req.session.lastName;
     res.locals.errorMessages = req.flash('error');
     res.locals.successMessages = req.flash('success');
     next();
@@ -53,6 +55,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
+
 
 //set up routes
 app.get('/', (req, res)=>{
