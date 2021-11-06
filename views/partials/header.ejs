@@ -13,9 +13,13 @@
         <a href="/"> <img src="/images/Banner.jpg" alt="Video game Play" id=hIMG> </a>
 
             <ul id="headerNAV">
-                <li><a href="/connections/new">Start a New Grouping</a></li>
-                <li><a href="/Login.ejs">Login</a></li>
-                <li><a href="/Signup.ejs">Sign up</a></li>
+                <%if(!user) {%>
+                    <a href='/users/new'>Sign Up</a>
+                    <a href='/users/login'>Login</a>
+               <% } else {%>
+                    <a href='/users/profile'>Profile</a>
+                    <a href='/users/logout'>Logout</a>
+                <%}%>
             </ul>
 
     </header>
@@ -24,7 +28,24 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/connections">Connections</a></li>
+            <li><a href="/connections/new">Start a New Grouping</a></li>
             
             
         </ul>
     </nav>
+    <% if(errorMessages.length > 0) {%>
+        <% errorMessages.forEach(message=>{%>
+            <div class='error'>
+                <%=message%>
+            </div>
+            <%});%>
+                <%}%>
+    
+                    <% if(successMessages.length > 0) {%>
+    
+                        <% successMessages.forEach(message=>{%>
+                            <div class='success'>
+                                <%=message%>
+                            </div>
+                            <%});%>
+                                <%}%>

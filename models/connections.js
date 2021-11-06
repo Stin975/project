@@ -13,7 +13,7 @@ const gamesSchema = new Schema({
     startTime: {type: String, required: [true, 'start Time is not set']},
     endTimeM: {type: String, required: [true, 'end Time is required']},
     endTime: {type: String, required: [true, 'end Time is not set']},
-    host: {type: String, required: [true, 'host is required']},
+    host: {type: Schema.Types.ObjectId, ref:'User'},
     image: {type: String, required: [true, 'image Url is required']},
 
 }

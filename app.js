@@ -5,6 +5,10 @@ const methodOverride = require('method-override');
 const mainRoutes = require('./routes/mainRoutes');
 const connectionRoutes = require('./routes/connectionRoutes');
 const mogoose = require('mongoose')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const userRoutes = require('./routes/userRoutes');
+const flash = require('connect-flash');
 
 
 //create app
@@ -17,13 +21,32 @@ app.set('view engine','ejs');
 
 //connecting to database
 mogoose.connect('mongodb://localhost:27017/project', 
-{useNewUrlParser: true, useUnifiedTopology: true})
+{useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
 .then(()=>{
     app.listen(port, host, ()=>{
         console.log('Server is running on port', port);
     });
 })
 .catch(err=>console.log(err.message));
+
+app.use(
+    session({
+        secret: "this is a secret10",
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/project'}),
+        cookie: {maxAge: 60*60*1000}
+        })
+);
+app.use(flash());
+
+app.use((req, res, next) => {
+    //console.log(req.session);
+    res.locals.user = req.session.user||null;
+    res.locals.errorMessages = req.flash('error');
+    res.locals.successMessages = req.flash('success');
+    next();
+});
 
 //mount middleware
 app.use(express.static('public'));
@@ -37,7 +60,9 @@ app.get('/', (req, res)=>{
 });
 
 app.use('/connections', connectionRoutes);
+app.use('/users', userRoutes);
 app.use('/', mainRoutes);
+
 
 
 app.use((req, res, next)=>{

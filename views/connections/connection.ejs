@@ -3,13 +3,15 @@
     <main>
         <Div id="connectionBody">
             <h2><%= games.title%></h2>
+            <% if(user == games.host._id){%>
             <form>
             <button type="submit" formmethod="GET" formaction="/connections/<%= games.id%>/edit">Edit</button>
             <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>?_method=DELETE">Delete</button>
             </form>
+            <%}%>
             <img class="conImg" src="<%= games.image %>" alt="Broken Link">
             <ul class="connectionInfo">
-                <li><p><%= games.host%></p></li>
+                <li><p> <%= games.host.firstName + " " + games.host.lastName%></p></li>
                 <li><p><%= games.date%></p></li>
                 <li><p><%= games.startTime%> - <%= games.endTime%></p></li>
                 <li><p><%= games.address%> </p></li>

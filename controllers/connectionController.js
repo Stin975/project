@@ -12,12 +12,12 @@ exports.index = (req, res, next)=>{
 exports.show = (req, res, next)=>{
     // res.send('send story with id ' + req.params.id);
     let id = req.params.id;
-    if(!id.match(/^[0-9a-fA-F]{24}$/)){
+    /*if(!id.match(/^[0-9a-fA-F]{24}$/)){
         let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
-    }
-    model.findById(id)
+    }*/
+    model.findById(id).populate('host', 'firstName lastName')
     .then((games)=>{
         if (games){
             res.render('./connections/connection', {games})
@@ -32,12 +32,12 @@ exports.show = (req, res, next)=>{
 
  exports.delete = (req, res, next)=>{
     let id = req.params.id;
-
+/*
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
         let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
-    }
+    }*/
 
     model.findByIdAndDelete(id, {useFindAndModify: false})
     .then(game => {
@@ -59,13 +59,14 @@ exports.show = (req, res, next)=>{
 exports.create = (req, res, next)=>{
     //res.send('Created a new story')
     let game = req.body;
-
+    
     let time = game.startTimeM.split(':');
     game.startTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
     time = game.endTimeM.split(':');
     game.endTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
     
     let Game = new model(game);// create a new story document
+    Game.host = req.session.user;
     Game.save()// insert the new document
     .then(Game=> res.redirect('/connections'))
     .catch(err=>{
@@ -78,11 +79,13 @@ exports.create = (req, res, next)=>{
 
 exports.edit = (req, res, next)=>{
     let id = req.params.id;
+    /*
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
         let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
     }
+    */
     model.findById(id)
     .then((games)=>{
         if (games){
@@ -107,11 +110,12 @@ exports.update = (req, res, next)=>{
     game.endTime =DateTime.local(1972, 1, 1, parseInt(time[0]), parseInt(time[1])).toLocaleString(DateTime.TIME_SIMPLE);
 
     let id = req.params.id;
+    /*
     if(!id.match(/^[0-9a-fA-F]{24}$/)){
         let err = new Error('Invalid connection id ');
         err.status = 400;
         return next(err);
-    }
+    }*/
 
     model.findByIdAndUpdate(id, game, {useFindAndModify: false, runValidators: true})
     .then((game)=>{
