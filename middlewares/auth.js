@@ -36,3 +36,18 @@ exports.isAuthor = (req, res, next)=>{
     .catch(err=>next(err));
     
 };
+exports.isNotAuthor = (req, res, next)=>{
+    let id  = req.params.id
+    games.findById(id)
+    .then(games=>{
+        if(games.host != req.session.user){
+            return next();
+        }else {
+            let err = new Error('Unauthorized to access the resource')
+            err.status = 401;
+            return next(err);
+        }
+    })
+    .catch(err=>next(err));
+    
+};

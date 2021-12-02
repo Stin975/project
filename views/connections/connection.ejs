@@ -8,7 +8,15 @@
             <button type="submit" formmethod="GET" formaction="/connections/<%= games.id%>/edit">Edit</button>
             <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>?_method=DELETE">Delete</button>
             </form>
-            <%}%>
+            <%} else if(user && user!=games.host){%>
+                <form id="RSVP">
+                    <h4>Are you going to attend! RSVP now!</h4>
+                    <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>/rsvp" name="rsvp" value="YES">Yes</button>
+                    <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>/rsvp" name="rsvp" value="NO">No</button>
+                    <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>/rsvp" name="rsvp" value="MAYBE">Maybe</button>
+                </form>
+
+                <%}%>
             <img class="conImg" src="<%= games.image %>" alt="Broken Link">
             <ul class="connectionInfo">
                 <li><p> <%= games.host.firstName + " " + games.host.lastName%></p></li>

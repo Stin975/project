@@ -1,14 +1,47 @@
-
 <%- include('../partials/header.ejs')%>
-<div class = "content">
-    <h2>Welcome, <%=user.firstName%></h2>
-    <%if(games.length) {%>
-        <p>You have created the following connections</p>
-        <%games.forEach(games => {%>
-            <a href = '/connections/<%= games.id%>'><p><%=games.title%></p></a>
-        <%});
-    } else {%>
-        <p>You have not created any connections</p>
-   <% } %>
+    <div class="content">
+        <h2>Welcome, <%=user.firstName%>
+        </h2>
+        <%if(games.length) {%>
+            <p>You have created the following connections</p>
+            <%games.forEach(games=> {%>
+                <a href='/connections/<%= games.id%>'>
+                    <p>
+                        <%=games.title%>
+                    </p>
+                </a>
+                <%}); } else {%>
+                    <p>You have not created any connections</p>
+                    <% } %>
+    </div>
+    <div class="content">
+        <%if(rsvps.length) {%>
+            <h3>You have RSVP'd the following connections</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Connection Name</th>
+                        <th>RSVP STATUS</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%rsvps.forEach(rsvp=> {%>
+                        <tr>
+                            <td><%=rsvp.games.title%></td>
+                            <td><%=rsvp.rsvp%></td>
+                            <td><a href='/connections/<%= games.id%>/edit'>Update</a></td>
+                            <td><a href='/connections/<%= games.id%>/?_method=DELETE'>Delete</a></td>
+                        </tr>
+                        
+                        <%}); %>
+                    </tbody>
+            </table>
+            <%} else {%>
+            <p>You have not created any connections</p>
+            <% } %>
+
+
     </div>
     <%- include('../partials/footer.ejs')%>
