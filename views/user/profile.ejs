@@ -29,17 +29,19 @@
                 <tbody>
                     <%rsvps.forEach(rsvp=> {%>
                         <tr>
-                            <td><%=rsvp.games.title%></td>
+                            <td><%=rsvp.connection.title%></td>
                             <td><%=rsvp.rsvp%></td>
-                            <td><a href='/connections/<%= games.id%>/edit'>Update</a></td>
-                            <td><a href='/connections/<%= games.id%>/?_method=DELETE'>Delete</a></td>
+                            <form>
+                            <td><button formmethod="get" formaction='/connections/<%= rsvp.connection.id%>/'>Update</button></td>
+                            <td><button formmethod="post" formaction='/connections/<%= rsvp.connection.id%>/rsvp?_method=DELETE'>Delete</button></td>
+                        </form>
                         </tr>
                         
                         <%}); %>
                     </tbody>
             </table>
             <%} else {%>
-            <p>You have not created any connections</p>
+            <p>You have not created any RSVP</p>
             <% } %>
 
 

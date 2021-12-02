@@ -20,4 +20,6 @@ router.put('/:id', isLoggedIn, validateId, isAuthor, controller.update);
 
 router.post('/:id/rsvp', validateId, isLoggedIn, isNotAuthor, controller.editRsvp);
 
+router.delete('/:id/rsvp', validateId, isLoggedIn, controller.deleteRsvp);
+
 module.exports = router;

@@ -18,10 +18,11 @@ exports.show = (req, res, next) => {
         err.status = 400;
         return next(err);
     }*/
-    model.findById(id).populate('host', 'firstName lastName')
-        .then((games) => {
+    Promise.all([model.findById(id).populate('host', 'firstName lastName'), rsvpModel.count({connection:id, rsvp:"YES"})])
+        .then((results) => {
+            const [games, rsvps] = results;
             if (games) {
-                res.render('./connections/connection', { games })
+                res.render('./connections/connection', { games, rsvps })
             } else {
                 let err = new Error('Cannot find a connection with id ' + id);
                 err.status = 404;
@@ -176,3 +177,16 @@ exports.editRsvp = (req, res, next) => {
     })
 
 };
+
+exports.deleteRsvp = (req, res, next) =>{
+    let id = req.params.id;
+    rsvpModel.findOneAndDelete({connection:id,user:req.session.user})
+    .then(rsvp=>{
+        req.flash('success', 'Successfully deleted RSVP')
+        res.redirect('/users/profile')
+    })
+    .catch(err => {
+        req.flash('error', err.message);
+        next(err);
+    });
+}

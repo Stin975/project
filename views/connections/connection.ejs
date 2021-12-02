@@ -10,6 +10,10 @@
             </form>
             <%} else if(user && user!=games.host){%>
                 <form id="RSVP">
+                   
+                        <h5><%=rsvps%> People are going</h5>
+                    
+                    
                     <h4>Are you going to attend! RSVP now!</h4>
                     <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>/rsvp" name="rsvp" value="YES">Yes</button>
                     <button type="submit" formmethod="POST" formaction="/connections/<%= games.id%>/rsvp" name="rsvp" value="NO">No</button>
