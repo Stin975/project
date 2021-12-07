@@ -29,6 +29,7 @@ exports.validateStory = [
     body('title', 'Title can not be empty').notEmpty().trim().escape(),
     body('content', 'Content can not be empty and has to be more than 10 characters').trim().escape().isLength({min: 10}),
     body('topic', 'Topic can not be empty').notEmpty().trim().escape(),
+    body('address', 'Address can not be empty').notEmpty().trim().escape(),
     body('date', 'Date can not be empty').notEmpty().trim().escape(),
     body('startTimeM', 'Start Time can not be empty').notEmpty().trim().escape(),
     body('endTimeM', 'End Time can not be empty').notEmpty().trim().escape(),
