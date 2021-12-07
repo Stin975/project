@@ -41,9 +41,10 @@ exports.delete = (req, res, next) => {
             return next(err);
         }*/
 
-    model.findByIdAndDelete(id, { useFindAndModify: false })
+    Promise.all([model.findByIdAndDelete(id, { useFindAndModify: false }), rsvpModel.deleteMany({connection:id})])
         .then(game => {
             if (game) {
+                req.flash('success', 'Successfully deleted connection and associated RSVPs')
                 res.redirect('/connections/');
             } else {
                 let err = new Error('Cannot find a connection with id ' + id);
@@ -144,7 +145,7 @@ exports.update = (req, res, next) => {
 exports.editRsvp = (req, res, next) => {
 
     let id = req.params.id;
-    rsvpModel.findOne({ connection: id }).then(rsvp => {
+    rsvpModel.findOne({ connection: id, user:req.session.user }).then(rsvp => {
         if (rsvp) {
             rsvpModel.findByIdAndUpdate(rsvp._id, { rsvp: req.body.rsvp }, { userFindAndModify: false, runValidators: true })
                 .then(rsvp => {
